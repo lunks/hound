@@ -4,7 +4,7 @@ Houndapp::Application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
   get '/sign_in', to: 'sessions#new'
   get '/sign_out', to: 'sessions#destroy'
-  get '/configuration', to: 'application#configuration'
+  get '/pages/*id', to: 'pages#show', as: :page, format: false
 
   resource :account, only: [:show]
   resources :builds, only: [:create]
