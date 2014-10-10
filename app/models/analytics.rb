@@ -10,7 +10,7 @@ class Analytics
     track(event: "Signed In")
   end
 
-  def track_activated(repo)
+  def track_enabled(repo)
     track(
       event: "Activated Public Repo",
       properties: {
@@ -19,9 +19,9 @@ class Analytics
     )
   end
 
-  def track_deactivated(repo)
+  def track_disabled(repo)
     track(
-      event: "Deactivated Public Repo",
+      event: "Deenabled Public Repo",
       properties: {
         name: repo.full_github_name
       }

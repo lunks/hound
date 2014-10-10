@@ -23,11 +23,11 @@ class Repo < ActiveRecord::Base
     repo
   end
 
-  def activate
+  def enable
     update(enabled: true)
   end
 
-  def deactivate
+  def disable
     update(enabled: false)
   end
 
