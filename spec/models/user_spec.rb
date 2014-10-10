@@ -8,8 +8,8 @@ describe User do
   describe ".subscribed_repos" do
     it "returns subscribed repos" do
       user = create(:user)
-      _unsubscribed_repo = create(:repo, users: [user])
-      _inactive_subscription = create(:subscription, :inactive, user: user)
+      unsubscribed_repo = create(:repo, users: [user])
+      inactive_subscription = create(:subscription, :inactive, user: user)
       active_subscription = create(:subscription, user: user)
 
       repos = user.subscribed_repos

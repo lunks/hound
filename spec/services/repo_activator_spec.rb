@@ -11,7 +11,7 @@ describe RepoActivator do
 
         expect(activator.activate(repo, github_token)).to be_truthy
         expect(GithubApi).to have_received(:new).with(github_token)
-        expect(repo.reload).to be_active
+        expect(repo.reload).to be_enabled
       end
 
       it 'makes Hound a collaborator' do
@@ -127,7 +127,7 @@ describe RepoActivator do
         activator.deactivate(repo, github_token)
 
         expect(GithubApi).to have_received(:new).with(github_token)
-        expect(repo.active?).to be_falsy
+        expect(repo.enabled?).to be_falsy
       end
 
       it 'removes GitHub hook' do

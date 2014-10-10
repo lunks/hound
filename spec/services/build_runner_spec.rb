@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe BuildRunner, '#run' do
-  context 'with active repo and opened pull request' do
+  context 'with enabled repo and opened pull request' do
     it 'creates a build record with violations' do
-      repo = create(:repo, :active, github_id: 123)
+      repo = create(:repo, :enabled, github_id: 123)
       payload = stubbed_payload(
         github_repo_id: repo.github_id,
         pull_request_number: 5,
@@ -52,7 +52,7 @@ describe BuildRunner, '#run' do
     end
 
     it 'initializes PullRequest with payload and Hound token' do
-      repo = create(:repo, :active, github_id: 123)
+      repo = create(:repo, :enabled, github_id: 123)
       payload = stubbed_payload(github_repo_id: repo.github_id)
       build_runner = BuildRunner.new(payload)
       stubbed_pull_request
@@ -66,9 +66,9 @@ describe BuildRunner, '#run' do
     end
   end
 
-  context 'without active repo' do
+  context 'without enabled repo' do
     it 'does not attempt to comment' do
-      repo = create(:repo, :inactive)
+      repo = create(:repo, :not_enabled)
       build_runner = make_build_runner(repo: repo)
       allow(Commenter).to receive(:new)
 
@@ -92,7 +92,7 @@ describe BuildRunner, '#run' do
     end
   end
 
-  def make_build_runner(repo: create(:repo, :active, github_id: 123))
+  def make_build_runner(repo: create(:repo, :enabled, github_id: 123))
     payload = stubbed_payload(github_repo_id: repo.github_id)
     BuildRunner.new(payload)
   end

@@ -86,22 +86,22 @@ describe Repo do
   end
 
   describe "#activate" do
-    it "updates repo active value to true" do
-      repo = create(:repo, active: false)
+    it "updates repo enabled value to true" do
+      repo = create(:repo, enabled: false)
 
       repo.activate
 
-      expect(repo.reload).to be_active
+      expect(repo.reload).to be_enabled
     end
   end
 
   describe "#deactivate" do
-    it "updates repo active value to false" do
-      repo = create(:repo, active: true)
+    it "updates repo enabled value to false" do
+      repo = create(:repo, enabled: true)
 
       repo.deactivate
 
-      expect(repo.reload).not_to be_active
+      expect(repo.reload).not_to be_enabled
     end
   end
 

@@ -61,7 +61,7 @@ class Analytics
 
   def track(options)
     backend.track({
-      active_repos_count: user.repos.active.count,
+      enabled_repos_count: user.repos.enabled.count,
       user_id: user.id,
     }.merge(options))
   end

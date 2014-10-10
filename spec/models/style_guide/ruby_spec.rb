@@ -79,7 +79,7 @@ end
       it "returns no violations" do
         expect(violations_in(<<-CODE)).to eq []
 users.detect do |user|
-  user.active?
+  user.enabled?
 end
         CODE
       end
@@ -89,7 +89,7 @@ end
       it "returns violations" do
         expect(violations_in(<<-CODE)).not_to be_empty
 users.find do |user|
-  user.active?
+  user.enabled?
 end
         CODE
       end
@@ -99,7 +99,7 @@ end
       it "returns no violations" do
         expect(violations_in(<<-CODE)).to eq []
 users.select do |user|
-  user.active?
+  user.enabled?
 end
         CODE
       end
@@ -109,7 +109,7 @@ end
       it "returns violations" do
         expect(violations_in(<<-CODE)).not_to be_empty
 users.find_all do |user|
-  user.active?
+  user.enabled?
 end
         CODE
       end

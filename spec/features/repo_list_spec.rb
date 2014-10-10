@@ -65,12 +65,12 @@ feature "Repo list", js: true do
     sign_in_as(user)
     find("li.repo .toggle").click
 
-    expect(page).to have_css(".active")
+    expect(page).to have_css(".enabled")
     expect(page).to have_content "1 OF 1"
 
     visit repos_path
 
-    expect(page).to have_css(".active")
+    expect(page).to have_css(".enabled")
     expect(page).to have_content "1 OF 1"
   end
 
@@ -92,18 +92,18 @@ feature "Repo list", js: true do
     sign_in_as(user)
     find(".repos .toggle").click
 
-    expect(page).to have_css(".active")
+    expect(page).to have_css(".enabled")
     expect(page).to have_content "1 OF 1"
 
     visit repos_path
 
-    expect(page).to have_css(".active")
+    expect(page).to have_css(".enabled")
     expect(page).to have_content "1 OF 1"
   end
 
   scenario "user deactivates repo" do
     user = create(:user)
-    repo = create(:repo, :active)
+    repo = create(:repo, :enabled)
     repo.users << user
     stub_hook_removal_request(repo.full_github_name, repo.hook_id)
 
@@ -111,18 +111,18 @@ feature "Repo list", js: true do
     visit repos_path
     find(".repos .toggle").click
 
-    expect(page).not_to have_css(".active")
+    expect(page).not_to have_css(".enabled")
     expect(page).to have_content "0 OF 1"
 
     visit current_path
 
-    expect(page).not_to have_css(".active")
+    expect(page).not_to have_css(".enabled")
     expect(page).to have_content "0 OF 1"
   end
 
   scenario "user deactivates private repo without subscription" do
     user = create(:user)
-    repo = create(:repo, :active, private: true)
+    repo = create(:repo, :enabled, private: true)
     repo.users << user
     stub_hook_removal_request(repo.full_github_name, repo.hook_id)
 
@@ -130,12 +130,12 @@ feature "Repo list", js: true do
     visit repos_path
     find(".repos .toggle").click
 
-    expect(page).not_to have_css(".active")
+    expect(page).not_to have_css(".enabled")
     expect(page).to have_content "0 OF 1"
 
     visit current_path
 
-    expect(page).not_to have_css(".active")
+    expect(page).not_to have_css(".enabled")
     expect(page).to have_content "0 OF 1"
   end
 

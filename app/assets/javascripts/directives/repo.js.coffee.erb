@@ -26,7 +26,7 @@ App.directive 'repo', ['Subscription', 'StripeCheckout', (Subscription, StripeCh
       )
 
       subscription.$save().then((response) ->
-        scope.repo.active = true
+        scope.repo.enabled = true
         scope.repo.stripe_subscription_id = response.stripe_subscription_id
       ).catch(->
         alert('Your subscription failed.')
@@ -40,7 +40,7 @@ App.directive 'repo', ['Subscription', 'StripeCheckout', (Subscription, StripeCh
       subscription = new Subscription(repo_id: scope.repo.id)
 
       subscription.$delete().then(->
-        scope.repo.active = false
+        scope.repo.enabled = false
         scope.repo.stripe_subscription_id = null
       ).catch(->
         alert('Your repo could not be disabled')
@@ -49,7 +49,7 @@ App.directive 'repo', ['Subscription', 'StripeCheckout', (Subscription, StripeCh
       )
 
     scope.toggle = ->
-      if scope.repo.active
+      if scope.repo.enabled
         if scope.repo.stripe_subscription_id
           deleteSubscription()
         else
