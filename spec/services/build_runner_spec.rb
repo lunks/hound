@@ -68,7 +68,7 @@ describe BuildRunner, '#run' do
 
   context "without enabled repo" do
     it "does not attempt to comment" do
-      repo = create(:repo, :not_enabled)
+      repo = create(:repo, :disabled)
       build_runner = make_build_runner(repo: repo)
       allow(Commenter).to receive(:new)
 

@@ -9,7 +9,7 @@ FactoryGirl.define do
 
   factory :repo do
     trait(:enabled) { enabled true }
-    trait(:not_enabled) { enabled false }
+    trait(:disabled) { enabled false }
     trait(:in_private_org) do
       enabled true
       in_organization true

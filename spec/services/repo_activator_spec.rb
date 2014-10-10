@@ -127,7 +127,7 @@ describe RepoActivator do
         activator.disable(repo, github_token)
 
         expect(GithubApi).to have_received(:new).with(github_token)
-        expect(repo.enabled?).to be_falsy
+        expect(repo).not_to be_enabled
       end
 
       it 'removes GitHub hook' do
