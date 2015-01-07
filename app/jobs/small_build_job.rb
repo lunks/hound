@@ -1,8 +1,7 @@
 require 'octokit'
 
-class SmallBuildJob
-  extend Retryable
-  extend Buildable
+class SmallBuildJob < ActiveJob::Base
+  include Buildable
 
-  @queue = :medium
+  queue_as :medium
 end

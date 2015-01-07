@@ -1,14 +1,7 @@
-require 'fast_spec_helper'
-require 'app/jobs/retryable'
-require 'app/jobs/buildable'
-require 'app/jobs/small_build_job'
+require 'spec_helper'
 
 describe SmallBuildJob do
-  it 'is retryable' do
-    expect(SmallBuildJob).to be_a(Retryable)
-  end
-
   it 'is buildable' do
-    expect(SmallBuildJob).to be_a(Buildable)
+    expect(SmallBuildJob.included_modules).to include(Buildable)
   end
 end
